@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Upload Image</h1>
+    <form action="{{ url_for('group_predictions') }}" method="POST" enctype="multipart/form-data" id="uploadForm">
+        <div class="form-group">
+            <label for="imageFile">Upload ZIP file containing images:</label>
+            <input type="file" class="form-control" id="imageFile" name="imageFile" accept=".zip" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload and Predict</button>
+    </form>
+</div>
+
+<script>
+    document.getElementById('uploadForm').onsubmit = function(event) {
+        event.preventDefault();  // Previene el envío normal del formulario
+        fetch("{{ url_for('group_predictions') }}", {
+            method: 'POST',
+            body: new FormData(this)
+        })
+        .then(response => {
+            if (response.ok) {
+                // Redirigir a la ruta de descarga
+                window.location.href = "/download_results";  
+                // Redirigir a la página de estadísticas después de un retraso
+                setTimeout(() => {
+                    window.location.href = "/statistics";  // Ajusta el tiempo según sea necesario
+                }, 3000);  // 3 segundos de espera antes de redirigir
+            } else {
+                alert("Error en la carga del archivo.");
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert("Ocurrió un error durante la carga.");
+        });
+    };
+</script>
+{% endblock %}

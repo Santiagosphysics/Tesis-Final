@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-4">Estadísticas de Calificación</h1>
+    
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">Resultados Generales</h5>
+            <p><strong>Media:</strong> {{ mean }}</p>
+            <p><strong>Mediana:</strong> {{ median }}</p>
+            <p><strong>Desviación Estándar:</strong> {{ std_dev }}</p>
+            <p><strong>Varianza:</strong> {{ variance }}</p>
+            <p><strong>Puntaje máximo:</strong> {{ max_score }}</p>
+            <p><strong>Puntaje mínimo:</strong> {{ min_score }}</p>
+            <p><strong>Estudiantes aprobados:</strong> {{ approved_students }}</p>
+            <p><strong>Estudiantes reprobados:</strong> {{ failed_students }}</p>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">Gráfico de barras </h5>
+            <img src="{{ url_for('static', filename='uploads/bar_plot.png') }}" alt="Bar plot" class="img-fluid">
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">Gráfico de barras con frecuencia </h5>
+            <img src="{{ url_for('static', filename='uploads/bar_fre_plot.png') }}" alt="Bar plot frec" class="img-fluid">
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">Gráfico de pastel 1 </h5>
+            <img src="{{ url_for('static', filename='uploads/pie_chart_frec.png') }}" alt="Gráfico de pastel 1" class="img-fluid">
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">Gráfico de pastel 2 </h5>
+            <img src="{{ url_for('static', filename='uploads/pie_chart.png') }}" alt="Gráfico de pastel 2" class="img-fluid">
+        </div>
+    </div>
+</div>
+{% endblock %}
