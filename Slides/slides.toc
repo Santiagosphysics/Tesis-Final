@@ -1,0 +1,18 @@
+\beamer@sectionintoc {1}{Resumen}{3}{0}{1}
+\beamer@sectionintoc {2}{Introducción}{4}{0}{2}
+\beamer@sectionintoc {3}{Problema}{5}{0}{3}
+\beamer@sectionintoc {4}{Justificación}{6}{0}{4}
+\beamer@sectionintoc {5}{Objetivo General}{7}{0}{5}
+\beamer@sectionintoc {6}{Objetivos Específicos}{8}{0}{6}
+\beamer@sectionintoc {7}{Antecedentes}{9}{0}{7}
+\beamer@sectionintoc {8}{Marco Teórico}{11}{0}{8}
+\beamer@subsectionintoc {8}{1}{Convolución}{13}{0}{8}
+\beamer@subsectionintoc {8}{2}{Pooling}{14}{0}{8}
+\beamer@subsectionintoc {8}{3}{ReLU}{15}{0}{8}
+\beamer@subsectionintoc {8}{4}{Capas Flatten}{16}{0}{8}
+\beamer@subsectionintoc {8}{5}{Capas Dense}{17}{0}{8}
+\beamer@subsectionintoc {8}{6}{Función Softmax}{18}{0}{8}
+\beamer@subsectionintoc {8}{7}{Estructura de la red}{19}{0}{8}
+\beamer@subsectionintoc {8}{8}{Sistema de calificación}{20}{0}{8}
+\beamer@sectionintoc {9}{Metodología}{21}{0}{9}
+\beamer@sectionintoc {10}{Discusión y conclusiones}{22}{0}{10}
