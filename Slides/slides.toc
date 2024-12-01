@@ -14,5 +14,17 @@
 \beamer@subsectionintoc {8}{6}{Función Softmax}{18}{0}{8}
 \beamer@subsectionintoc {8}{7}{Estructura de la red}{19}{0}{8}
 \beamer@subsectionintoc {8}{8}{Sistema de calificación}{20}{0}{8}
-\beamer@sectionintoc {9}{Metodología}{21}{0}{9}
-\beamer@sectionintoc {10}{Discusión y conclusiones}{22}{0}{10}
+\beamer@subsectionintoc {8}{9}{Reconocimiento Óptico de Caracteres}{21}{0}{8}
+\beamer@sectionintoc {9}{Metodología}{22}{0}{9}
+\beamer@subsectionintoc {9}{1}{Vinculación del OCR y el modelo de CNN}{23}{0}{9}
+\beamer@subsectionintoc {9}{2}{Formato de preguntas}{24}{0}{9}
+\beamer@subsectionintoc {9}{3}{Conjunto de datos}{25}{0}{9}
+\beamer@subsectionintoc {9}{4}{Estructura CNN}{26}{0}{9}
+\beamer@subsectionintoc {9}{5}{Estructuración de OCR y CNN}{27}{0}{9}
+\beamer@subsectionintoc {9}{6}{Estructura del aplicativo web}{28}{0}{9}
+\beamer@sectionintoc {10}{Conclusiones}{29}{0}{10}
+\beamer@subsectionintoc {10}{1}{Desempeño del modelo}{30}{0}{10}
+\beamer@subsectionintoc {10}{2}{Impacto en la educación}{31}{0}{10}
+\beamer@subsectionintoc {10}{3}{Limitaciones del sistema}{32}{0}{10}
+\beamer@subsectionintoc {10}{4}{Recomendaciones para el uso}{33}{0}{10}
+\beamer@subsectionintoc {10}{5}{Perspectivas futuras}{34}{0}{10}

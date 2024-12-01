@@ -93,6 +93,11 @@
     \end{itemize}
 \end{frame}
 
+
+
+%------------------------------------------_____________________________________**__________________________________----------------------------------------------------------------
+
+
 \section{Marco Teórico}
 \begin{frame}{Marco Teórico}
     Los algoritmos de OCR permiten extraer información importante de las imágenes a través de diferentes parámetros, una vez se establecen es posible la recolección de información, la cual, se puede utilizar en un modelo de redes neuronales convolucionales (CNN), que se encargan de de claisificar de acuerdo con los diferentes mapas de características,
@@ -101,7 +106,11 @@
 
 
 \begin{frame}{Redes neuronales convolucionales CNN}
-    Las redes neuronales convolucionales (CNN), también conocidas como ConvNets, son un tipo especializado de arquitectura de redes neuronales profundas diseñadas específicamente para procesar datos de imágenes. Estas redes son altamente efectivas en tareas de visión por computadora, incluido el reconocimiento de patrones y la clasificación de objetos. El momento el que las CNN se posicionan como una tecnología especializada en el análisis de imágenes, fue en el 2010 con la competencia anual de ImageNet, en la cual, se utiliza este mismo conjunto de datos que posee cerca de quince millones de imágenes clasificadas en veinte mil categorías. A partir de este punto, las CNN se reconocen principalmente por su desempeño significativamente alto, la relativa disminución del tiempo de entrenamiento en relación con los diferentes modelos y el uso de tarjetas gráficas para procesar las imágenes (Krizhevsky, Sutskever, \& Hinton, 2012). La arquitectura de una CNN se basa en el concepto de convolución, que es una operación matemática fundamental en el procesamiento de señales.
+    \textbf{Definición}
+    \[
+    \]
+    Las redes neuronales convolucionales (CNN), también conocidas como ConvNets, son una arquitectura especializada dentro del campo de las redes neuronales profundas. Están diseñadas específicamente para el procesamiento de datos de imágenes, siendo altamente efectivas en tareas como el reconocimiento de patrones y la clasificación de objetos. Su arquitectura está fundamentada en la operación matemática de la convolución, un proceso esencial en el análisis de señales que permite extraer características significativas de las imágenes procesadas.
+
 \end{frame}
 
 
@@ -124,8 +133,10 @@
 \subsection{Pooling}
 \begin{frame}{Pooling}
     \begin{itemize}
-        \item La principal función de las capas pooling es reducir la dimensionalidad entre el conjunto de datos con las representaciones hechas por el Kernel, de forma que se disminuye el tamaño de la matriz de salida, permitiendo que se retengan las características sobresalientes del conjunto de datos de entrada y depurando aquellas como el ruido que no aportan información relevante.   
-        \item El tipo más común es Max Pooling, que se aplica de forma semejante a la del Kernel, es decir, utilizando matrices de 2*2 o 3*3, selecciona los píxeles con mayor intensidad en la escala de grises y lo pasa a una nueva matriz, por otra parte, aquellos con menor intensidad son despreciados. De esta forma, se reduce significativamente la dimensionalidad de los mapas de características, sin perder información relevante.     
+        \item \textbf{Función Principal} \[\] Las capas de pooling están diseñadas para reducir la dimensionalidad de los datos procesados por el Kernel. Este proceso disminuye el tamaño de la matriz de salida, reteniendo únicamente las características más relevantes y eliminando elementos no esenciales, como el ruido.
+        \item \textbf{Max Pooling} \[\] Es el tipo más común de capa de pooling y opera de manera similar al Kernel.
+        Utiliza matrices pequeñas, típicamente de tamaños 2*2 o 3*3, para seleccionar los valores de píxeles con mayor intensidad dentro de la escala de grises.
+        Los valores con menor intensidad son descartados, lo que permite preservar información clave mientras se reduce significativamente la dimensionalidad de los mapas de características.
     \end{itemize}
 
     \begin{figure}
@@ -137,37 +148,40 @@
 
 \subsection{ReLU}
 \begin{frame}{ReLU}
-    Diversos autores sugieren que se puede aplicar la función ReLU luego de las capas de Pooling, teniendo en cuenta que en éstas los objetos ya se encuentran lo suficientemente caracterizados con las dimensiones reducidas, ahora a cada elemento de las marices es sometido en la siguiente función:
-    
-    \[
-    f(x) = max (0, x)
-    \]
-
-    Implicando unas consideraciones iniciales a la hora de utilizar esta función de activación, estas son, el poco consumo de recursos computacionales ya que evalúa los elementos de las matrices y si son menores o iguales que cero, se obtiene un 0 en la posición de ese elemento, si por el contrario es mayor que cero, obtendrá el valor de intensidad correspondiente. Es decir, el uso de la función ReLU permite que los valores positivos pasen a la siguiente capa sin cambios y los negativos sean convertidos en 0. Lo anterior plantea una no linealidad, permitiendo que en el entrenamiento el modelo pueda aprender relaciones complejas, no obstante, el uso de esta función de activación plantea un problema y es que es vulnerable a convertir tantos elementos en cero que podrían apagarse algunas neuronas indefinidamente, o como se conoce neurona muerta.
-
+    Es frecuentemente utilizada después de las capas de pooling, ya que en este punto los objetos están suficientemente caracterizados con dimensiones reducidas. 
+    \[ f(x) = max (0, x) \]
+    Su funcionamiento es sencillo: evalúa cada elemento de la matriz de salida, reemplazando con 0 los valores menores o iguales a cero y conservando los valores positivos sin alteraciones. Esto permite que los valores positivos se transmitan intactos a la siguiente capa, mientras que los negativos se eliminan.    
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\textwidth]{/home/lic-jimenez/Documents/Tesis-Final/Slides/ReLU_1.png}
+    \end{figure}
 \end{frame}
 
 
 \subsection{Capas Flatten}
 \begin{frame}{Capas Flatten}
-    Al tener un mapa de características robusto se aplica una capa en la que se deben “aplanar” las dimensiones, es decir, si se utiliza imágenes en escala de grises, se puede afirmar que solamente se están utilizando dos dimensiones para la altura y el ancho, a estas se le adiciona la tercera dimensión que corresponde a las diferentes tonalidades (entre blanco y negro) que puede tomar cada pixel, sin embargo, es necesario pasar del tensor mencionado anteriormente a un vector con una única dimensión (con la multiplicación de las dimensiones de cada matriz como la longitud del vector). Permitiendo que la información de la imagen se pueda utilizar en capas completamente conectadas y sobre éstas se pueda hacer la clasificación o predicción
+Las capas Flatten se utilizan para convertir mapas de características multidimensionales en un vector unidimensional, esencial para conectar dichas características con las capas completamente conectadas. Por ejemplo, en imágenes en escala de grises, el mapa tiene dos dimensiones principales (altura y ancho), con una tercera dimensión que representa los niveles de intensidad (tonalidades). La capa Flatten toma este tensor tridimensional y lo transforma en un vector, cuya longitud es el producto de las dimensiones originales.
+    \begin{figure}
+        \centering
+        \includegraphics[width=0.5\textwidth]{/home/lic-jimenez/Documents/Tesis-Final/Slides/flatten.png}
+    \end{figure}
 \end{frame}
 
 
 \subsection{Capas Dense}
 \begin{frame}{Capas Dense}
-    Las capas Dense o fully conected, se encargan de conectar cada una de las neuronas generadas por las capas Flatten con el fin de que en las últimas etapas del proceso de aprendizaje, el modelo pueda evaluar las características de cada una de las clases y diferenciarlas. Permitiendo que el modelo pueda caracterizar aún más cada uno de los elementos que procesa esta capa. Considerando que, el vector unidimensional generado en la capa Flatten posee diferentes elementos que hacen referencia a una clase, es decir, cada elemento da razón de los mapas de características aplicados y se guarda un patrón de información respectivo, esta información es la que permite conocer cómo las clases se relacionan entre sí y que el modelo pueda determinar a qué clase pertenece.     
+    El vector unidimensional proveniente de la capa Flatten contiene información representativa de las características extraídas, donde cada elemento refleja patrones relevantes asociados a las clases procesadas. A través de la conexión completa de las neuronas, las capas Dense consolidan esta información y determinan cómo se relacionan las clases entre sí, ayudando al modelo a identificar con precisión a qué clase pertenece cada elemento evaluado.
 \end{frame}
 
 
 
 \subsection{Función Softmax}
 \begin{frame}{Función Softmax}  
-   El uso de la función Softmax es ideal para problemas de clasificación multiclase y teniendo en cuenta que en el proyecto se utilizaron alrededor de 36 clases es posible utilizar la función de activación softmax, esto se debe a que dado un vector unidimensional (proporcionado por la capa Flatten) se pueda evaluar la probabilidad que tiene un elemento del vector a pertenecer a una clase
+    La función Softmax es esencial en problemas de clasificación multiclase, como los abordados en este proyecto, donde se trabajó con 36 clases. Su uso permite transformar un vector unidimensional (proveniente de la capa Flatten) en probabilidades asociadas a cada clase, facilitando la clasificación. La función se define como:
     \[
    softmax(z_i) = \frac{e^{z_i}}{\sum_j e^{z_j}}
     \]
-    Siendo Z el vector, i la clase a la que pertenece y j hace referencias a los diferentes mapas de características, teniendo en cuenta que para cada mapa se evalúa la probabilidad desde 0 hasta 1, donde los valores cercanos a cero muestran que no hay una correspondencia con la clase que se evalúa, por otro lado, aquellos que se aproximan al uno son los que tienen mayor probabilidad de que puedan pertenecer a determinada clase. De esta forma es como se pasa de un vector unidimensional a conocer la probabilidad que tiene una clase de pertenecer a un mapa de características.
+    El valor resultante oscila entre 0 y 1, representando la probabilidad de que un elemento pertenezca a una clase específica. Valores cercanos a 0 indican baja probabilidad de pertenencia, mientras que aquellos próximos a 1 reflejan una alta probabilidad. De este modo, Softmax permite asociar cada clase con un mapa de características específico, facilitando la clasificación final basada en las probabilidades calculadas.
     
 \end{frame}
 
@@ -189,7 +203,23 @@
         Accuracy = \frac{True predictions}{Total predictions}
         \]
         \item \textbf{Recall}: Está dado por aquellas predicciones realizadas por el modelo en las imágenes tanto de entrenamiento como de validación, en las que evalúa los verdaderos positivos entre la suma de los verdaderos positivos y los falsos negativos
+        \[
+        Recall = \frac{TP_i}{TP_i+FN_i}
+        \]
         \item \textbf{F1-score}: Se puede considerar el f1-score como el punto medio entre el Accuracy y Recall, dado que evalúa tanto los verdaderos positivos, falsos negativos y los correctamente identificados
+        \[
+        F1 = \frac{2*Accuracy*Recall}{Accuracy+Recall}
+        \]
+    \end{itemize}
+\end{frame}
+
+\subsection{Reconocimiento Óptico de Caracteres}
+\begin{frame}{Reconocimiento Óptico de Caracteres}
+    \begin{itemize}
+        \item El reconocimiento óptico de caracteres (OCR) basado en redes neuronales convolucionales (CNN) es una técnica avanzada que permite convertir texto en imágenes a texto digital. Según Doermann y Tombre (2014), las CNN son ideales para esta tarea debido a su capacidad de extraer características jerárquicas y patrones a distintos niveles de abstracción, haciéndolas altamente efectivas en tareas de visión por computadora.
+        \item No obstante, durante este proyecto, no se logró implementar satisfactoriamente tecnologías conocidas de OCR debido a limitaciones relacionadas con la variabilidad en letras, fuentes, estructuras y lenguajes. Drobac y Lindén (2020) señalan que estos desafíos han existido desde las primeras etapas del desarrollo de algoritmos OCR.
+        \item Pese a estas limitaciones, las CNN representan una herramienta robusta y adaptable, capaz de enfrentarse a escenarios complejos y variables en el reconocimiento de caracteres.
+        
     \end{itemize}
 \end{frame}
 
@@ -204,23 +234,129 @@
 \end{frame}
 
 
-\section{Discusión y conclusiones}
-\begin{frame}{Discusión y conclusiones}
+\subsection{Vinculación del OCR y el modelo de CNN}
+\begin{frame}{Vinculación del OCR y el modelo de CNN}
+    Se decidió construir un algoritmo de OCR especializado en la detección de caracteres en exámenes de opción múltiple y el proceso está basado en redes neuronales convolucionales.
+
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{/home/lic-jimenez/Documents/Tesis-Final/Slides/resume_2.png}
+    \end{figure}
+\end{frame}
+
+
+
+\subsection{Formato de preguntas}
+\begin{frame}{Formato de preguntas}
+    La forma en la que el modelo recibe tanto el número de preguntas como su respectiva respuesta es utilizando números y letras. Se debe considerar que la primera columna referente a la pregunta y respuesta no se tiene en cuenta a la hora de hacer la evaluación. A partir de la segunda columna se encuentran en la primera fila los números correspondientes a la pregunta y en la segunda fila las letras respectivas a las respuestas.  
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{/home/lic-jimenez/Documents/Tesis-Final/images_test/img_001.png}
+    \end{figure}
+\end{frame}
+
+
+\subsection{Conjunto de datos}
+\begin{frame}{Conjunto de datos}
+    Una vez establecido el formato y limitaciones de este, se determinó que se usará MNIST para realizar el entrenamiento del modelo predictivo. Las razones por las que se eligió son las siguientes: MNIST NUMBERS que contiene 70.000 imágenes, divididas en 60.000 de entrenamiento y 10.000 de validación, donde cada número tiene entre 7.000 y 8.000 imágenes. Por otra parte, para las letras se utilizó el conjunto de datos proporcionado por (IA Expert Academy, s.f.), en el que se contiene 372.450 registros fotográficos de letras escritas a mano, en general de cada dígito hay entre cinco mil y diez mil imágenes. 
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{/home/lic-jimenez/Documents/Tesis-Final/Slides/dataset.png}
+    \end{figure}
+\end{frame}
+
+
+\subsection{Estructura CNN}
+\begin{frame}{Estructura CNN}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{/home/lic-jimenez/Documents/Tesis-Final/Slides/estructura_cnn.png}
+    \end{figure}
+\end{frame}
+
+
+
+\subsection{Estructuración de OCR y CNN}
+\begin{frame}{Estructuración de OCR y CNN}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{/home/lic-jimenez/Documents/Tesis-Final/Slides/estructura_ocr.png}
+    \end{figure}
+\end{frame}
+
+
+
+\subsection{Estructura del aplicativo web}
+\begin{frame}{Estructura del aplicativo web}
+    \begin{figure}
+        \centering
+        \includegraphics[width=1\textwidth]{/home/lic-jimenez/Documents/Tesis-Final/Slides/estructura_web.png}
+    \end{figure}
+    
+\end{frame}
+
+
+\section{Conclusiones}
+\begin{frame}{Conclusiones}
+    A continuación se mostrarán algunas de las conclusiones a las que se llegaron
     \begin{itemize}
-        \item En este tr
+        \item Desempeño del modelo
+        \item Impacto en la educación 
+        \item Limitaciones del sistema 
+        \item Recomendaciones para el uso 
+        \item Perspectivas futuras
+    \end{itemize}
+\end{frame}
+
+
+\subsection{Desempeño del modelo}
+\begin{frame}{Desempeño del modelo}
+    \begin{itemize}
+        \item Se desarrolló e implementó un modelo basado en redes neuronales convolucionales, logrando métricas sobresalientes con una precisión (accuracy) de 0.95, un recall de 0.95 y un f1-score de 0.96, lo que asegura una clasificación eficiente de las clases evaluadas.
+        \item Al integrarse con un algoritmo OCR para la calificación de exámenes de opción múltiple, el sistema alcanzó una precisión de 0.97 en la clasificación de imágenes completas y una precisión general de 0.99 en la detección de caracteres individuales.
 
     \end{itemize}
 \end{frame}
 
 
+\subsection{Impacto en la educación}
+\begin{frame}{Impacto en la educación}
+    \begin{itemize}
+        \item SEste proyecto demuestra que es posible automatizar la calificación de exámenes con alta precisión, optimizando el trabajo docente y permitiendo que los recursos se destinen a actividades educativas más relevantes.
+        \item La solución no solo facilita la evaluación eficiente, sino que también genera confianza en la implementación de tecnologías avanzadas en contextos educativos.
+    \end{itemize}
+\end{frame}
 
 
 
+\subsection{Limitaciones del sistema}
+\begin{frame}{Limitaciones del sistema}
+    \begin{itemize}
+    \item El modelo funciona de manera óptima para exámenes con hasta siete preguntas y opciones de respuesta de "A" a "F".
+    \item Los números "0" y "5" presentan un rendimiento bajo debido a confusiones con las letras "O" y "S", respectivamente. Sin embargo, estas limitaciones no afectan significativamente el desempeño general del modelo.
+    \item Todas las respuestas deben estar en letras mayúsculas y escritas claramente para garantizar una detección correcta. Los bordes de las letras no deben solaparse con los márgenes de las celdas.
+    \end{itemize}
+\end{frame}
 
 
+\subsection{Recomendaciones para el uso}
+\begin{frame}{Recomendaciones para el uso}
+    \begin{itemize}
+        \item Siguiendo las instrucciones establecidas sobre claridad y formato de las respuestas, el aplicativo garantiza una calificación precisa y confiable.
+        \item Es fundamental mantener el diseño del examen dentro de los parámetros definidos para evitar errores en el proceso de evaluación.
+
+    \end{itemize}
+\end{frame}
 
 
-
+\subsection{Perspectivas futuras}
+\begin{frame}{Perspectivas futuras}
+    \begin{itemize}
+        \item Extender las funciones del algoritmo OCR para incluir la identificación del estudiante y vincular esta información con una base de datos que registre su desempeño académico.
+        \item Desarrollar un sistema que permita calificar tanto exámenes de selección múltiple como preguntas abiertas mediante algoritmos avanzados de OCR.
+        \item Mejorar el manejo de caracteres ambiguos (como "0" y "5") para aumentar la versatilidad y robustez del modelo.
+    \end{itemize}
+\end{frame}
 
 
 
